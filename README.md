@@ -5,6 +5,8 @@
 [![SRS Compliance](https://img.shields.io/badge/SRS%20v1.0-Fully%20Implemented-cyan.svg)](#srs-compliance-matrix)
 [![Research Paper](https://img.shields.io/badge/Research%20Paper-Empirical%20Gate%20%26%20XMM-violet.svg)](#research-paper-mathematical-foundation)
 
+## Click here to open the website: https://devonboard.onrender.com/
+
 **DevOnboard** is a full-stack developer onboarding and mentoring platform that couples **retrieval-grounded document question answering** with **explainable load-aware mentor matching (XMM)**, using **abstention** as the critical operational bridge between them.
 
 When newcomers join an unfamiliar software project, they consistently struggle with codebase orientation, environment-setup hurdles, and reaching experienced contributors with time to help. DevOnboard tackles both halves of the problem:
