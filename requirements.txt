@@ -1,0 +1,6 @@
+# DevOnboard Python Runtime Requirements
+# DevOnboard is intentionally engineered with Python 3.10+ Standard Library:
+# - ThreadingHTTPServer (http.server)
+# - sqlite3 with FTS5 Full-Text Search
+# - math, urllib, json, collections, uuid
+# Zero external heavy pip dependencies are strictly required to run the application.

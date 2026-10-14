@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Deep Dark Slate Rich Gradient (#0B0F19 Core) -->
+    <linearGradient id="bg-slate" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161F33" />
+      <stop offset="45%" stop-color="#0B0F19" />
+      <stop offset="100%" stop-color="#05070C" />
+    </linearGradient>
+
+    <!-- Subtle Specular Rim Highlight -->
+    <linearGradient id="rim-light" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.22" />
+      <stop offset="50%" stop-color="#C47844" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.03" />
+    </linearGradient>
+
+    <!-- Soft Ambient AI Outer Glow -->
+    <radialGradient id="ambient-glow" cx="52%" cy="50%" r="46%">
+      <stop offset="0%" stop-color="#D99138" stop-opacity="0.38" />
+      <stop offset="45%" stop-color="#38BDF8" stop-opacity="0.16" />
+      <stop offset="100%" stop-color="#0B0F19" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Primary Chevron Metallic Gradient -->
+    <linearGradient id="chevron-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="55%" stop-color="#FDE68A" />
+      <stop offset="100%" stop-color="#D99138" />
+    </linearGradient>
+
+    <!-- Secondary Neural Strut Gradient -->
+    <linearGradient id="strut-grad" x1="0%" y1="0%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#D99138" />
+    </linearGradient>
+
+    <!-- Apex Node Gradient -->
+    <linearGradient id="apex-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF08A" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#B45309" />
+    </linearGradient>
+
+    <!-- Soft Glow Filter -->
+    <filter id="ai-glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="14" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Base Squircle Background -->
+  <rect width="512" height="512" rx="114" fill="url(#bg-slate)" />
+  
+  <!-- Inner Rim Specular Highlight -->
+  <rect x="4" y="4" width="504" height="504" rx="110" fill="none" stroke="url(#rim-light)" stroke-width="6" />
+
+  <!-- Ambient AI Glow Aura -->
+  <circle cx="266" cy="256" r="210" fill="url(#ambient-glow)" />
+
+  <!-- Connected Node-Chevron Mark -->
+  <g filter="url(#ai-glow)">
+    <!-- Inner Neural Struts -->
+    <line x1="162" y1="140" x2="234" y2="256" stroke="url(#strut-grad)" stroke-width="24" stroke-linecap="round" />
+    <line x1="162" y1="372" x2="234" y2="256" stroke="url(#strut-grad)" stroke-width="24" stroke-linecap="round" />
+    <line x1="234" y1="256" x2="368" y2="256" stroke="url(#strut-grad)" stroke-width="26" stroke-linecap="round" />
+
+    <!-- Primary Bold Chevron Arms -->
+    <path d="M 162 140 L 368 256 L 162 372" fill="none" stroke="url(#chevron-grad)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- Precision Engineered Nodes (with dark slate separation collars) -->
+  <!-- Top Wing Node -->
+  <circle cx="162" cy="140" r="40" fill="#0B0F19" />
+  <circle cx="162" cy="140" r="28" fill="#FFFFFF" />
+  <circle cx="162" cy="140" r="12" fill="#0B0F19" />
+
+  <!-- Bottom Wing Node -->
+  <circle cx="162" cy="372" r="40" fill="#0B0F19" />
+  <circle cx="162" cy="372" r="28" fill="#FFFFFF" />
+  <circle cx="162" cy="372" r="12" fill="#0B0F19" />
+
+  <!-- Inner Core Nexus Node -->
+  <circle cx="234" cy="256" r="34" fill="#0B0F19" />
+  <circle cx="234" cy="256" r="22" fill="#38BDF8" />
+  <circle cx="234" cy="256" r="9" fill="#FFFFFF" />
+
+  <!-- Leading Apex Node -->
+  <circle cx="368" cy="256" r="48" fill="#0B0F19" />
+  <circle cx="368" cy="256" r="34" fill="url(#apex-grad)" />
+  <circle cx="368" cy="256" r="14" fill="#FFFFFF" />
+</svg>

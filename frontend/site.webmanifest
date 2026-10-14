@@ -1,0 +1,28 @@
+{
+  "name": "DevOnboard — Engineering Onboarding Hub",
+  "short_name": "DevOnboard",
+  "description": "Developer Onboarding & Mentorship Platform with AI Guidance",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#0B0F19",
+  "background_color": "#0B0F19",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "/"
+}
