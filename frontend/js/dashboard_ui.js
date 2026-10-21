@@ -8,7 +8,7 @@ window.DashboardUI = {
     this.bindEvents();
   },
 
-  bindEvents: {
+  bindEvents: function () {
     // any static bindings
   },
 
