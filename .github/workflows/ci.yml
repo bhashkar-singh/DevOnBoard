@@ -21,6 +21,11 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Run DevOnboard Verification Test Suite
+    - name: Install Selenium for E2E Browser Testing
+      run: |
+        python -m pip install --upgrade pip
+        pip install selenium
+
+    - name: Run DevOnboard Verification & Selenium E2E Suite
       run: |
         python -m unittest discover -s tests -v

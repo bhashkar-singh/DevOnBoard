@@ -155,12 +155,27 @@ class TestApiEndpoints(unittest.TestCase):
     def test_booking_and_rating_workflow(self):
         simulate_request('POST', '/api/auth/switch-user', {'user_id': 'usr_mentee_alex'})
 
+        import datetime
+        now = datetime.datetime.now()
+        d1 = now + datetime.timedelta(days=4)
+        d2 = now + datetime.timedelta(days=5)
+        d3 = now + datetime.timedelta(days=6)
+
+        d1_str = d1.strftime('%A, %b %d, %Y (02:00 PM - 03:00 PM)')
+        d1_iso = d1.strftime('%Y-%m-%d')
+
+        d2_str = d2.strftime('%A, %b %d, %Y (10:00 AM - 11:00 AM)')
+        d2_iso = d2.strftime('%Y-%m-%d')
+
+        d3_str = d3.strftime('%A, %b %d, %Y (10:00 AM - 11:00 AM)')
+        d3_iso = d3.strftime('%Y-%m-%d')
+
         # 1. Book an upcoming session (>24h in future)
         status, b_data = simulate_request('POST', '/api/sessions/book', {
             'mentor_id': 'usr_mentor_elena',
             'slot_idx': 8,
-            'scheduled_date': '2026-10-16',
-            'scheduled_time': 'Friday, Oct 16, 2026 (02:00 PM - 03:00 PM)',
+            'scheduled_date': d1_iso,
+            'scheduled_time': d1_str,
             'topic': 'Deep-dive into out-of-vocabulary coverage weighting'
         })
         self.assertEqual(status, 200)
@@ -180,8 +195,8 @@ class TestApiEndpoints(unittest.TestCase):
         # 3. Mentee reschedules the session (>=24h in advance)
         status_resched, resched_data = simulate_request('POST', '/api/sessions/reschedule', {
             'session_id': sess_id,
-            'scheduled_date': '2026-10-17',
-            'scheduled_time': 'Saturday, Oct 17, 2026 (10:00 AM - 11:00 AM)',
+            'scheduled_date': d2_iso,
+            'scheduled_time': d2_str,
             'slot_idx': 10,
             'topic': 'Updated: OOV coverage weighting & citations'
         })
@@ -202,8 +217,8 @@ class TestApiEndpoints(unittest.TestCase):
         status_b2, b2_data = simulate_request('POST', '/api/sessions/book', {
             'mentor_id': 'usr_mentor_elena',
             'slot_idx': 6,
-            'scheduled_date': '2026-10-18',
-            'scheduled_time': 'Sunday, Oct 18, 2026 (10:00 AM - 11:00 AM)',
+            'scheduled_date': d3_iso,
+            'scheduled_time': d3_str,
             'topic': 'Session to test 24h cancellation'
         })
         self.assertEqual(status_b2, 200)
