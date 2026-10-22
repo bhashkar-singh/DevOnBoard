@@ -139,7 +139,7 @@ class DevOnboardHandler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def send_error_json(self, message, status=400):
-        self.send_json({"error": message, "status": status}, status=status)
+        self.send_json({"error": message, "status": status, "success": False}, status=status)
 
     def do_OPTIONS(self):
         self.send_response(200)
@@ -717,7 +717,12 @@ class DevOnboardHandler(BaseHTTPRequestHandler):
             elif path == '/api/auth/login':
                 email = body.get('email', '').strip().lower()
                 user_id = body.get('user_id')
-                
+                password = body.get('password')
+
+                if password is not None and password != 'password123':
+                    self.send_error_json("Invalid password", 401)
+                    return
+
                 if user_id:
                     c.execute("SELECT * FROM users WHERE user_id = ?", (user_id,))
                 elif email:
@@ -727,15 +732,15 @@ class DevOnboardHandler(BaseHTTPRequestHandler):
 
                 row = c.fetchone()
                 if not row:
-                    # Default fallback to Alex Rivera if demo login
-                    c.execute("SELECT * FROM users WHERE user_id = 'usr_mentee_alex'")
-                    row = c.fetchone()
+                    self.send_error_json("User not found", 404)
+                    return
 
                 user = dict(row)
                 CURRENT_STATE["active_user_id"] = user['user_id']
                 mock_jwt = f"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.{user['user_id']}_{int(time.time())}.devonboard_sig"
                 self.send_json({
                     "status": "authenticated",
+                    "success": True,
                     "token": mock_jwt,
                     "user": user
                 })
@@ -928,7 +933,7 @@ class DevOnboardHandler(BaseHTTPRequestHandler):
                         answer_res['candidate_mentors'] = ranked_matches
 
                 # Write to append-only audit log (Paper Section III-A)
-                log_id = f"aud_{int(time.time()*1000)}"
+                log_id = f"aud_{int(time.time()*1000)}_{uuid.uuid4().hex[:6]}"
                 top_cid = gate_res['top_passage']['chunk_id'] if gate_res.get('top_passage') else None
                 escalated_id = escalated_mentor['mentor_id'] if escalated_mentor else None
 
@@ -951,6 +956,9 @@ class DevOnboardHandler(BaseHTTPRequestHandler):
 
             elif path == '/api/sessions/book':
                 mentor_id = body.get('mentor_id')
+                if not mentor_id:
+                    self.send_error_json("mentor_id is required", 400)
+                    return
                 slot_idx = int(body.get('slot_idx', 0))
                 topic = body.get('topic', 'Developer Onboarding & Codebase Guidance').strip()
                 scheduled_date = body.get('scheduled_date', '').strip()
